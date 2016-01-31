@@ -1,10 +1,11 @@
 var home = function(req, res){
   res.render("home", {"classes": [
-  "Olin.js",
-  "other class 1",
-  "other class 2",
-  "other class 3"]
+  {name:"Olin.js", teacher: "The fabulous student teaching team"},
+  {name:"UOCD", teacher: "Sara Hendren et al"},
+  {name: "DREAM", teacher: "Amon"},
+  {name: "ProbStat", teacher: "Rehana"}]
   });
 };
 
 module.exports.home = home;
+
