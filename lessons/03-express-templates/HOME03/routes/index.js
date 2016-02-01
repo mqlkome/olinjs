@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var db = require('../fakeDatabase');
-
+var nameArray = ['Mouse', 'Horse', 'Collie', 'Birdie', 'Lizard', 'Snake'];
+var colorArray = ['chocolate', 'lime', 'orange', 'plum', 'peach', 'cream', 'honey', 'tea', ]
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { message: 'Welcome to Cast School of Wizardry. If you want ' +
@@ -10,15 +11,12 @@ router.get('/', function(req, res, next) {
 
 
 function Cat(){
-	//name stuff
-	var nameArray = ['Mouse', 'Horse', 'Collie', 'Birdie', 'Lizard', 'Snake'];
-	var newName = nameArray[Math.round(Math.random() * (nameArray.length - 1))]; //thanks stack overflow
-	//color stuff
-	var colorArray = ['chocolate', 'lime', 'orange', 'plum', 'peach', 'cream', 'honey', 'tea', ]
+	var ind = Math.round(Math.random() * (nameArray.length - 1));//thanks stack overflow
+	var newName = nameArray[ind]; 
+	nameArray.splice(ind, 1); //don't reuse names
 	var newColor = colorArray[Math.round(Math.random() * (colorArray.length - 1))];
-	
 	var newAge = Math.floor((Math.random() * 100) + 1);
-
+	//create db entry
 	var cat = {
 		name: newName,
 		color: newColor,
@@ -27,36 +25,41 @@ function Cat(){
 	return cat;
 }
 router.get('/cats/new', function(req, res, next){
-	var newCat = Cat() 
-	db.add(newCat)
-	//res.render('newcatpage', {newcatinfo: 'Added cat named ' + newCat.name + '. Color: ' + newCat.color + ' Age: ' + newCat.age})
+	var newCat = Cat()
+	if (newCat.name){db.add(newCat)} else {res.send("You've already got more cats than you can care for. Love those who are already here.")}
 	res.send('Added cat named ' + newCat.name + '. Color: ' + newCat.color + ' Age: ' + newCat.age)
 });
 
 router.get('/cats', function(req, res, next){
 	var cats = db.getAll();
-	var msg = 'These are all the cats that live here: '
+	var msg = 'These are all the cats that live here: ' + '</br>'
 	cats.forEach(function(kitty){
-		msg = msg + kitty.name + ', ';
+		msg = msg + kitty.name + ' ('+ kitty.color + ', ' + kitty.age + ')' + '</br>';
 	});
 	res.send(msg);
-	//a list of cats, sorted by age, display their names, colors, ages
 });
-
-// router.get('/cats/bycolor/:color', function(req, res, next){
-	//shows a list of cats of a particular color (parameter :color) sorted by age
-// });
 
 router.get('/cats/delete/old', function(req, res, next){
 	var allCats = db.getAll();
-	var firstCat = allCats[0].name;
-	res.send(firstCat + ' has left the sanctuary');
-	db.remove(0)
+	if (allCats[0]){
+		var firstCat = allCats[0].name;
+		res.send(firstCat + ' has left the sanctuary');
+		db.remove(0);
+	} else {res.send("You're the only one here. What now?")}
 
-	//deletes the oldest cat from the "db" and it shouldn't appear on any lists
-	//verification message
 });
 
+router.get('/cats/bycolor/:color', function(req, res, next){
+	var allCats = db.getAll();
+	var colorChoice = req.params.color;
+	allCats = allCats.filter(function(entry){
+		return entry.color === colorChoice;
+	});
+	var msg = 'These are all the ' + colorChoice + ' cats that live here: ' + '</br>'
+	allCats.forEach(function(kitty){
+		msg = msg + kitty.name + ' ('+ kitty.color + ', ' + kitty.age + ')' + '</br>';
+	});
+	res.send(msg);
+
+});
 module.exports = router;
-
-

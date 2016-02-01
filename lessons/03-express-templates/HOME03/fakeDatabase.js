@@ -1,3 +1,4 @@
+
 var FakeDatabase = module.exports = {
 
     data: [],
@@ -5,6 +6,10 @@ var FakeDatabase = module.exports = {
     add: function(obj) {
         //adds item to end of array holding data
         FakeDatabase.data.push(obj);
+        function compare(a,b) {
+            return b.age-a.age;
+        }
+        FakeDatabase.data.sort(compare);
     },
 
     getAll: function() {
