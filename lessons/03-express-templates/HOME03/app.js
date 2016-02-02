@@ -10,6 +10,9 @@ var routes = require('./routes/index');
 
 var app = express();
 
+var mongoose = require('mongoose')
+mongoose.connect('mongodb://localhost/test');
+
 // view engine setup
 app.engine("handlebars", exphbs({defaultLayout: "main"}));
 app.set("view engine", "handlebars");
