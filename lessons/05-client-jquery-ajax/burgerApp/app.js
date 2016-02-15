@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 
 var index = require('./routes/index');
-
+var ingredients = require('./routes/ingredients')
 var app = express();
 
 var mongoose = require('mongoose')
@@ -25,9 +25,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', index.homepage);
-app.get('/cats/new', index.catsnew);
-app.get('/cats', index.cats)
+app.get('/', index.homePage);
+app.get('/ingredients', index.ingredientsPage);
+app.get('/order', index.orderPage);
+app.get('/kitchen', index.kitchenPage);
+
+//Ingredients Subroutes
+app.post('/addIngredient', ingredients.addIngredient)
+app.post('/editIngredient', ingredients.editIngredient)
+app.post('/oosIngredient', ingredients.oosIngredient)
+
+//Order Subroutes
+//app.post('/submitOrder', order.submitOrder)
+
 
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {

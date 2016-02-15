@@ -1,0 +1,33 @@
+<h4>Ingredients:</h4>
+
+<h2>Add an Ingredient</h2>
+<form id="ajax-ingr-form">
+  Ingredient: <input type="text" name='name'/><br/>
+  Cost: <input type="text" name="cost"/><br/>
+  <input type="submit" value="Submit">
+</form>
+<div id="result">
+</div>
+
+<ul id = "ingrList" >
+	{{#each ingredients}}
+	<li id = "{{_id}}" style="display: block">Ingredient: <span class="name">{{name}}</span> ____ Cost: <span class="cost">{{cost}}</span> 
+		<button class = "oosButton">out of stock</button>
+		<form class = "ajax-ingr-edit-form">
+  			edit name: <input type="text" name='name'/>
+  			edit cost: <input type="text" name="cost"/>
+  			<input type="submit" value="save edits">
+		</form>
+		
+	</li>
+	{{/each}}
+	<li id = "hidden-template-li" style = "display: none">
+		Ingredient: <span class="name">Veggie</span> ____ Cost: <span class="cost">6</span>
+		<button class = "oosButton">out of stock</button>
+		<form class = "ajax-ingr-edit-form">
+  			edit name: <input type="text" name='name'/>
+  			edit cost: <input type="text" name="cost"/>
+  			<input type="submit" value="save edits">
+		</form>
+	</li>
+</ul>

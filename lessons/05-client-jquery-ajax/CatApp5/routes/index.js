@@ -4,12 +4,14 @@ var router = express.Router();
 var Cat = require('../models/catModel.js');
 
 var nameArray = ['Mouse', 'Horse', 'Collie', 'Birdie', 'Lizard', 'Snake'];
-var colorArray = ['chocolate', 'lime', 'orange', 'plum', 'peach', 'cream', 'honey', 'tea', ]
+var colorArray = ['chocolate', 'lime', 'orange', 'plum', 'peach', 'cream', 'honey', 'tea', ];
+
+var routes = {};
 /* GET home page. */
-router.get('/', function(req, res, next) {
+routes.homepage = function(req, res) {
   res.render('index', { message: 'Welcome to Cast School of Wizardry. If you want ' +
   'to be a wizard, you are in the wrong place. This is a cat sanctuary.'});
-});
+};
 
 
 function makeCat(){
@@ -30,18 +32,17 @@ function makeCat(){
 	};
 	return cat;
 }
-
-router.get('/cats/new', function(req, res, next){
+routes.catsnew = function(req, res){
 	var newCat = new Cat(makeCat());
 	if (newCat.name){
-		newCat.save(function (err, newCat) {
-  			if (err) return console.error(err);
-  			res.send('Added cat named ' + newCat.name + '. Color: ' + newCat.color + ' Age: ' + newCat.age)
-		});	
+		newCat.save(function(err, newCat){
+			if (err) {return console.error(err);
+				res.render('catsnew', {newCat: newCat})}
+		});
 	} else {res.send("You've already got more cats than you can care for. Love those who are already here.")}
-});
+};
 
-router.get('/cats', function(req, res, next){
+routes.cats = function(req, res){
 	// var cats = db.getAll();
 	Cat.find(function (err, cats) {
   		if (err) return console.error(err);
@@ -55,7 +56,7 @@ router.get('/cats', function(req, res, next){
 		});
 		res.send(msg);
 	});
-});
+};
 
 router.get('/cats/old/bye', function(req, res, next){
 	Cat.find(function (err, cats) {
@@ -102,4 +103,4 @@ router.get('/cats/observeUnder/:age', function(req, res, next){
 	})
 });
 
-module.exports = router;
+module.exports = routes;
