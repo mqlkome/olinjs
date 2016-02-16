@@ -1,4 +1,6 @@
+//index.js contains the routes for the main pages to render and get the needed docs from the db.
 var Ingredient = require('../models/ingredientModel')
+var Order = require('../models/orderModel')
 
 var routes = {};
 
@@ -15,10 +17,22 @@ routes.ingredientsPage = function(req, res){
 	});
 };
 routes.orderPage = function(req, res){
-	res.render('order', {message: 'order routed!'});
+	Ingredient.find({}, function(error, ingredients){
+		if (error){
+			console.log(error);
+		}else{
+			res.render('order', {ingredients: ingredients});
+		}
+	})
 };
 routes.kitchenPage = function(req, res){
-	res.render('kitchen', {message:'kitchen routed!'});
+	Order.find({}, function(error, orders){
+		if (error){
+			console.log(error);
+		}else{
+			res.render('kitchen', {orders: orders});
+		}
+	})
 };
 
 module.exports = routes;
@@ -26,10 +40,3 @@ module.exports = routes;
 
 
 
-	Ingredient.find({}, function (error, ingredients){
-		if (error){
-			console.log(error);
-		} else{
-			res.render('order', {ingredients: ingredients});
-		}
-	});

@@ -1,22 +1,18 @@
-<h4>Order</h4>
-{{message}}
-<p>This is the order page. It should:</p>
-<ul>
-<li>show a form that allows customers to create a new hamburger</li>
-<li>have a checklist of all ingredients and their price</li>
-<li>out of stock items should have a disabled checkbox</li>
-<li>submit button to submit the order without refreshing</li>
-<li>happy message when they have ordered</li>
-<li>a running total cost counter that updates whenever something is added or removed</li>
-</ul>
+<h5 id = "thanksMessage" style = "display: none"> Thanks for the order! </h5>
 
-
-
-<h2>AJAX request for Order Ingredients Checklist</h2>
+<h2>Craft your perfect burger</h2>
 <form id="ajax-order-form" action="submitOrder" method="POST">
   Your Name: <input type="text" name="customerName"/><br/>
-  <input type="checkbox" name="ingredient1" value="IngredientName"> CheckboxText<br>
+  <h3>What would you like on your burger?</h3>
+	{{#each ingredients}}
+	<li id = "{{_id}}" style="display: block">Ingredient: <span class="name">{{name}}</span> ____ Cost: <span class="cost">{{cost}}</span> 
+		<input type="checkbox" name="ingredient1" value="{{name}}" cost = "{{cost}}"> <br>
+	</li>
+	{{/each}}
   <input type="submit" value="Submit">
 </form>
 <div id="result">
 </div>
+
+<h4> Total Cost: <span id = 'total'> </span></h4>
+

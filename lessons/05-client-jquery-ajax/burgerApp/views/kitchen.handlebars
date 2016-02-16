@@ -1,7 +1,8 @@
 <h4>Kitchen</h4>
-{{message}}
-<p>This is the kitchen page. It should:</p>
-<ul>
-<li>show a list of all pending orders</li>
-<li>a Completed button next to each order that tells the server that the order is complete and that removes the order from the list of orders without refreshing the page</li>
-</ul>
+<form id="ajax-kitchen-form" action="finishOrder" method="POST">
+	{{#each orders}}
+		<li id = "{{_id}}" style="display: block"> Order: <span class="name">{{name}}</span> ____ Choices: <span class="choices">{{choices}}</span> 
+		<button class = "completedButton">completed</button>
+		</li>
+	{{/each}}
+</form>

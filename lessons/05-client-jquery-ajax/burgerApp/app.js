@@ -8,6 +8,9 @@ var exphbs = require('express-handlebars');
 
 var index = require('./routes/index');
 var ingredients = require('./routes/ingredients')
+var order = require('./routes/order')
+var kitchen = require('./routes/kitchen')
+
 var app = express();
 
 var mongoose = require('mongoose')
@@ -36,8 +39,10 @@ app.post('/editIngredient', ingredients.editIngredient)
 app.post('/oosIngredient', ingredients.oosIngredient)
 
 //Order Subroutes
-//app.post('/submitOrder', order.submitOrder)
+app.post('/submitOrder', order.submitOrder)
 
+//Kitchen Subroutes
+app.post('/finishOrder', kitchen.finishOrder)
 
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {

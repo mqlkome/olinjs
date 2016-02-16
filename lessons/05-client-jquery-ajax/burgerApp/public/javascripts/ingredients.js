@@ -1,5 +1,3 @@
-console.log('hello');
-
 var $ingrForm = $("#ajax-ingr-form");
 var $templateLi = $("#hidden-template-li");
 var $ingrList = $("#ingrList");
@@ -9,7 +7,6 @@ var $oosButton;
 bindHandlers();
 
 var onSuccess = function(data, status) {
-  	//something here to load to the page--html and jquery things??
   	var $newLi = $templateLi.clone();
   	$newLi.attr('id', data._id);
   	$newLi.css('display', 'block')
