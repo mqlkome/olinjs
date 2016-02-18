@@ -10,10 +10,8 @@ var exphbs = require('express-handlebars'); //lets you use handlebars
 var mongoose = require('mongoose'); //javascript wrapper for mongo; lets you use database
 
 //Main page routes
-var index = require('./routes/index');
-var ingredients = require('./routes/ingredients');
-var order = require('./routes/order');
-var kitchen = require('./routes/kitchen');
+//ex. var index = require('./routes/index');
+//fill in routes
 
 var app = express(); //initialize app object
 
@@ -33,24 +31,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Routing: directing requests to render stuff ("API spec")
-app.get('/', index.homePage);
-app.get('/ingredients', index.ingredientsPage);
-app.get('/order', index.orderPage);
-app.get('/kitchen', index.kitchenPage);
+//ex. app.get('/', index.homePage);
+//fill in routing
 
-//Ingredients Subroutes
-app.post('/addIngredient', ingredients.addIngredient);
-app.post('/editIngredient', ingredients.editIngredient);
-app.post('/oosIngredient', ingredients.oosIngredient);
+//Subroutes (page changes w/out refresh)
+//ex. app.post('/addIngredient', ingredients.addIngredient);
+//fill in subroutes by page
 
-//Order Subroutes
-app.post('/submitOrder', order.submitOrder);
-
-//Kitchen Subroutes
-app.post('/finishOrder', kitchen.finishOrder);
 
 //Choose a location from which the app is accessed
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
   console.log("Application running on port: ", PORT);
 });
+
+
+
+
+

@@ -33,6 +33,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Routing: directing requests to render stuff ("API spec")
+
 app.get('/', index.homePage);
 app.get('/ingredients', index.ingredientsPage);
 app.get('/order', index.orderPage);
