@@ -10,8 +10,8 @@ var exphbs = require('express-handlebars'); //lets you use handlebars
 var mongoose = require('mongoose'); //javascript wrapper for mongo; lets you use database
 
 //Main page routes
-//ex. var index = require('./routes/index');
-//fill in routes
+var index = require('./routes/index');
+var login = require('./routes/login');
 
 var app = express(); //initialize app object
 
@@ -31,8 +31,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Routing: directing requests to render stuff ("API spec")
-//ex. app.get('/', index.homePage);
-//fill in routing
+app.get('/', index.homePage);
+app.get('/login', login.loginPage)
 
 //Subroutes (page changes w/out refresh)
 //ex. app.post('/addIngredient', ingredients.addIngredient);

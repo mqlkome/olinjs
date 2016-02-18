@@ -1,9 +1,7 @@
-var express = require('express');
-var router = express.Router();
+var routes = {};
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { message: "OlinJS rocks!" });
-});
+routes.homePage = function(req,res){
+	res.render('index', {message: "rendered index"})
+};
 
-module.exports = router;
+module.exports = routes;
