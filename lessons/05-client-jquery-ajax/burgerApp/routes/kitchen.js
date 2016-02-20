@@ -7,6 +7,7 @@ routes.finishOrder = function(req, res){
 			res.status(500).send('Error when finishing order')
 		};
 		res.send(req.body);
+
 	});
 };
 
