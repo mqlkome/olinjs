@@ -7,6 +7,20 @@ var routes = {};
 routes.homePage = function(req, res){
 	res.render('index', {message: 'This is the burger app homepage.'});
 };
+
+// Food for thought:
+	// 1. routes.ingredientsPage and routes.orderPage are are doing the exact same
+	// thing - they are providing our app with all the ingredients in the DB. Yet,
+	// the only difference is that they render a different handlebars layout. How can you 
+	// make this more modular? 
+	
+	// 2. What happens when I create an ingredient with no price? You need to keep
+	// in ming those edge cases and handle potential null exceptions that might show up.
+	// The problem with allowing an ingredient to be created with no price is that it has a null (NaN)
+	// value and when we make an order the running sum of the order also fails and becomes
+	// a NaN value.
+
+// Other than that I love how you have broken down your API in three files!!
 routes.ingredientsPage = function(req, res){
 	Ingredient.find({}, function (error, ingredients){
 		if (error){

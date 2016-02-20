@@ -5,6 +5,8 @@ routes.addIngredient = function(req, res){
 	//req will have data from AJAX, this will save it to the database, 
 	//and the callback will res.send some information about the data that was saved.
 	//could also do some legitimacy/sense checks
+
+	// Note: Check if cost!=="" --> Then save, otherwise save and set value of ""/null to 0, perhaps.
 	var ingr = new Ingredient({
 		name: req.body.name, 
 		cost: req.body.cost
