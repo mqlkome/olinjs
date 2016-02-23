@@ -8,6 +8,8 @@ var cookieParser = require('cookie-parser'); //lets server access cookies
 var bodyParser = require('body-parser'); //lets server access req.body
 var exphbs = require('express-handlebars'); //lets you use handlebars
 var mongoose = require('mongoose'); //javascript wrapper for mongo; lets you use database
+var session = require('express-session');
+var auth = require('./auth');
 
 //Main page routes
 var index = require('./routes/index');
@@ -29,14 +31,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({ secret: 'this is not a secret ;)',
+  resave: false,
+  saveUninitialized: false }));
 
 //Routing: directing requests to render stuff ("API spec")
 app.get('/', index.homePage);
 app.get('/login', login.loginPage)
 
-//Subroutes (page changes w/out refresh)
+//Subroutes (page changes w/out refresh) fill in by page
 //ex. app.post('/addIngredient', ingredients.addIngredient);
-//fill in subroutes by page
+app.post('/addTwote', index.addTwote);
+app.post('/logIn', login.logIn, index.homePage)
 
 
 //Choose a location from which the app is accessed
@@ -44,8 +50,3 @@ var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
   console.log("Application running on port: ", PORT);
 });
-
-
-
-
-

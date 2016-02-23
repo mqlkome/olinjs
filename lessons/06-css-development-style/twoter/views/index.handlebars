@@ -1,2 +1,21 @@
-<h1>Hello World!</h1>
 <h2>{{message}}</h2>
+<h2>Make yourself heard:</h2>
+
+<form id="ajax-twote-form" action = "addTwote" method = "POST">
+  <input type="text" name='twote'/><br/>
+  <input type="submit" value="Submit">
+</form>
+<div id="result">
+</div>
+
+
+
+<ul id = "twoteList" >
+	<li id = "hidden-template-li" style = "display: none">
+		Twote: <span class="user">shouldBeAName</span> said <span class="twote">Wordswords</span>
+	</li>
+	{{#each twotes}}
+	<li id = "{{_id}}" style="display: block"> Twote: <span class = "user">{{this.user}} </span> said <span class="twote">{{this.twote}}</span>
+	</li> 
+	{{/each}}
+</ul>

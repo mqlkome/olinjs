@@ -9,7 +9,7 @@ bindHandlers();
 var onSuccess = function(data, status) {
   	var $newLi = $templateLi.clone();
   	$newLi.attr('id', data._id);
-  	$newLi.css('display', 'block')
+  	$newLi.css('display', 'block');
   	$newLi.find('.name').html(data.name);
   	$newLi.find('.cost').html(data.cost);  
   	$ingrList.append($newLi);	
