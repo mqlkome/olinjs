@@ -1,19 +1,29 @@
 var $twoteForm = $("#ajax-twote-form");
 var $templateLi = $("#hidden-template-li");
 var $twoteList = $("#twoteList");
+var $eraseTwoteButton = $(".eraseTwoteButton");
+var $userListEntry = $("#userList li")
 
-var onSuccess = function(data, status){
+var onSuccessIndex = function(data, status){
 	console.log("onSuccess twote data:")
 	console.log(data);
 	var $newLi = $templateLi.clone()
 	$newLi.attr('id', data._id);
   	$newLi.css('display', 'block');
-  	$newLi.find('.user').html(data.user);
+  	$newLi.find('.user').html(data.username);
   	$newLi.find('.twote').html(data.twote);
   	$twoteList.prepend($newLi);
 };
 
-var onError = function(data, status){
+var onSuccessErase = function(data, status){
+	if (data.noDeleting){
+		alert("That twote isn't yours! Please do not delete other users' thoughts");
+	}else{
+		$("#" + data.id).remove();
+	}
+};
+
+var onErrorIndex = function(data, status){
 	console.log("status", status);
 	console.log("error", data);
 };
@@ -24,6 +34,26 @@ $twoteForm.submit(function(event){
 	$.post("addTwote", {
 		twote: twote
 	})
-	.done(onSuccess)
-	.error(onError)
+	.done(onSuccessIndex)
+	.error(onErrorIndex)
 });
+
+
+$eraseTwoteButton.click(function(event){
+	event.preventDefault();
+	var id = this.parentElement.id;
+	var user = $("#" + id).find(".user").val(); //.user means [class = user] because . is shortcut for class
+	$.post("eraseTwote", {id:id, user: user}) 
+	.done(onSuccessErase) 
+	.error(onErrorIndex)
+});
+
+$userListEntry.click(function(event){
+	console.log("this.classname, this")
+	console.log(this.className)
+	console.log(this)
+	console.log($('.'+ this.className + '.not-highlighted'))
+	$('.highlighted').toggleClass('highlighted not-highlighted')
+	$('.'+ this.className + '.not-highlighted').toggleClass('highlighted not-highlighted')
+	
+})

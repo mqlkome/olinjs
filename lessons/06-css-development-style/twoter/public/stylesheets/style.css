@@ -1,8 +1,23 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: lightblue; 
 }
 
 a {
   color: #00B7FF;
+}
+
+.not-highlighted {
+	background-color: none;
+}
+
+
+.highlighted{
+	background-color: yellow;
+}
+
+
+#userList li {
+	cursor: pointer;
 }

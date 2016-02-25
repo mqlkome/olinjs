@@ -9,11 +9,12 @@ var bodyParser = require('body-parser'); //lets server access req.body
 var exphbs = require('express-handlebars'); //lets you use handlebars
 var mongoose = require('mongoose'); //javascript wrapper for mongo; lets you use database
 var session = require('express-session');
-var auth = require('./auth');
+
 
 //Main page routes
 var index = require('./routes/index');
 var login = require('./routes/login');
+var logout = require('./routes/logout');
 
 var app = express(); //initialize app object
 
@@ -39,11 +40,13 @@ app.use(session({ secret: 'this is not a secret ;)',
 app.get('/', index.homePage);
 app.get('/login', login.loginPage)
 
+
 //Subroutes (page changes w/out refresh) fill in by page
 //ex. app.post('/addIngredient', ingredients.addIngredient);
 app.post('/addTwote', index.addTwote);
-app.post('/logIn', login.logIn, index.homePage)
-
+app.post('/logIn', login.logIn);
+app.post('/logOut', logout.logOut);
+app.post('/eraseTwote', index.eraseTwote);
 
 //Choose a location from which the app is accessed
 var PORT = process.env.PORT || 3000;

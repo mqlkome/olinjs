@@ -61,7 +61,7 @@ function bindHandlers() {
 	});
 	$oosButton.click(function(event){
 		event.preventDefault();
-		var id = this.parentElement.id
+		var id = this.parentElement.id;
 		$.post("oosIngredient", {id: id})
 		.done(onSuccessOos)
 		.error(onError)

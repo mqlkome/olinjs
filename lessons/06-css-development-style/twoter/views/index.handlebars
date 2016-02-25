@@ -1,21 +1,40 @@
 <h2>{{message}}</h2>
-<h2>Make yourself heard:</h2>
-
-<form id="ajax-twote-form" action = "addTwote" method = "POST">
-  <input type="text" name='twote'/><br/>
-  <input type="submit" value="Submit">
+<h2> Hello, {{user}}!</h2>
+<h4>Make yourself heard:</h4>
+<form id="ajax-twote-form" name = "twoteform" action = "addTwote" method = "POST">
+  <input type="text" name='twote' {{#if flag}}disabled = 'true'{{/if}}/><br/>
+  <input type="submit" value="Submit" name = "submitButton" {{#if flag}}disabled = 'true' {{/if}}>
 </form>
+
 <div id="result">
 </div>
 
 
-
+<h4>Twotes:</h4>
 <ul id = "twoteList" >
-	<li id = "hidden-template-li" style = "display: none">
+	<li id = "hidden-template-li" style="display: none" class="not-highlighted {{this.user_id}}">
 		Twote: <span class="user">shouldBeAName</span> said <span class="twote">Wordswords</span>
+		<button class="eraseTwoteButton"> erase twote</button>
 	</li>
 	{{#each twotes}}
-	<li id = "{{_id}}" style="display: block"> Twote: <span class = "user">{{this.user}} </span> said <span class="twote">{{this.twote}}</span>
+	<li id = "{{_id}}" style="display: block" class = "not-highlighted {{this.user_id}}" > 
+		Twote: <span class="user">{{this.username}} </span> said <span class="twote">{{this.twote}}</span>
+		<button class="eraseTwoteButton"> erase twote</button>
 	</li> 
+	{{/each}}
+</ul>
+
+
+
+<form id="logOut-form" action = "/logOut" method = "POST">
+  <input type="submit" value="Log Out">
+</form>
+<div id="result">
+</div>
+
+<h4>Users:</h4>
+<ul id = "userList"> 
+	{{#each users}}
+	<li class="{{this._id}}">{{this.username}}</li>
 	{{/each}}
 </ul>
