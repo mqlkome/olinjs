@@ -5,5 +5,4 @@ routes.logOut = function(req, res){
 	res.redirect('/login');
 };
 
-
 module.exports = routes;

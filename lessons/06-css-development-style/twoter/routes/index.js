@@ -9,8 +9,6 @@ routes.homePage = function(req,res){
 			console.log(error);
 		} else{
 			User.findOne({_id: req.session.userID}, function (err, user){
-				console.log("homePage user");
-				console.log(user);
 				User.find({}, function (err, users){
 					if (err){console.log(err)}
 					if(user){
@@ -38,8 +36,6 @@ routes.addTwote = function(req, res){
 };
 
 routes.eraseTwote = function(req, res){
-	console.log("req.body.id:")
-	console.log(req.body.id)
 	Twote.findOne({_id: req.body.id}, function(err, doc){
 		if (doc.user_id === req.session.userID){
 			doc.remove(function(err, doc){
@@ -50,19 +46,5 @@ routes.eraseTwote = function(req, res){
 			})
 		}else{res.send({noDeleting: true})}
 	});
-
-
-
-
-
-	if (req.body.user == "the user that's logged in"){
-
-		Twote.findByIdAndRemove(req.body.id, function(err, doc){
-			if (err){
-				res.status(500).send('Error when removing twote from db')
-			};
-			res.send(req.body);
-		});
-	} else{"tell them they don't have permission to delete a twote they didn't write"}
 };
 module.exports = routes;

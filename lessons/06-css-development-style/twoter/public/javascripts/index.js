@@ -5,8 +5,6 @@ var $eraseTwoteButton = $(".eraseTwoteButton");
 var $userListEntry = $("#userList li")
 
 var onSuccessIndex = function(data, status){
-	console.log("onSuccess twote data:")
-	console.log(data);
 	var $newLi = $templateLi.clone()
 	$newLi.attr('id', data._id);
   	$newLi.css('display', 'block');
@@ -49,11 +47,6 @@ $eraseTwoteButton.click(function(event){
 });
 
 $userListEntry.click(function(event){
-	console.log("this.classname, this")
-	console.log(this.className)
-	console.log(this)
-	console.log($('.'+ this.className + '.not-highlighted'))
 	$('.highlighted').toggleClass('highlighted not-highlighted')
 	$('.'+ this.className + '.not-highlighted').toggleClass('highlighted not-highlighted')
-	
 })
