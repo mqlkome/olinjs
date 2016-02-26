@@ -1,36 +1,55 @@
+//Useful server-side libraries/packages
+//ask google about npm ___ to learn more
+var express = require('express');//express makes an app object
+var path = require('path'); //path allows the creation of paths (with /) from individual names
+var cookieParser = require('cookie-parser'); //lets server access cookies
+var bodyParser = require('body-parser'); //lets server access req.body
+var exphbs = require('express-handlebars'); //lets you use handlebars
+var mongoose = require('mongoose'); //javascript wrapper for mongo; lets you use database
+var session = require('express-session');
+var morgan = require('morgan');             // log requests to the console (express4) /debugging tool
+var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 
-/**
- * Module dependencies.
- */
 
-var express = require('express')
-  , routes = require('./routes');
+//Main page routes
+var index = require('./routes/index');
+var login = require('./routes/login');
+var logout = require('./routes/logout');
 
-var app = module.exports = express.createServer();
+var app = express(); //initialize app object
 
-// Configuration
+mongoose.connect('mongodb://localhost/test'); //connect to mongo database
 
-app.configure(function(){
-  app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(app.router);
-  app.use(express.static(__dirname + '/public'));
-});
+// view engine setup
+app.engine("handlebars", exphbs({defaultLayout: "main"}));
+app.set("view engine", "handlebars");
 
-app.configure('development', function(){
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+//Middleware: happens before the request gets to the routes and must happen in order
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());   // parse application/json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
+app.use(methodOverride());
+app.use(cookieParser());
 
-app.configure('production', function(){
-  app.use(express.errorHandler());
-});
+//Routing: directing requests to render stuff ("API spec")
+app.get("*", skwiki.home);
+app.get('/skwikis', skwiki.getLinks);
+app.get('/skwiki/:skwiki_id', skwiki.getSkwiki);
+app.get('/search', skwiki.search);
+app.delete("/skwiki/:skwiki_id", skwiki.deleteSkwiki);
 
-// Routes
+//Subroutes (page changes w/out refresh) fill in by page
+//ex. app.post('/addIngredient', ingredients.addIngredient);
+app.post('/addSkwiki', skwiki.addSkwiki);
+app.post('/editSkwiki', skwiki.editSkwiki);
 
-app.get('/', routes.index);
 
-app.listen(3000, function(){
-  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+//Choose a location from which the app is accessed
+var PORT = process.env.PORT || 3000;
+app.listen(PORT, function() {
+  console.log("Application running on port: ", PORT);
 });
