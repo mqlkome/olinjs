@@ -26,18 +26,28 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="images/favicon.png">
 
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+  <script src="javascripts/root.js"></script>
 
 </head>
-<body>
+<body ng-controller = "mainController">
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 25%">
-        <h4>The #1 Skeleton Wiki</h4>
+        <h1>The #1 Skeleton Wiki</h1>
         <p>Welcome to the Skwiki. It's currently little more than bare bones...</p>
+        <div class="skwikiList" ng-repeat="skwiki in skwikis">
+          {{skwiki.title}}
+        </div>
+        
+        
       </div>
     </div>
   </div>
@@ -46,3 +56,5 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 </html>
+
+
