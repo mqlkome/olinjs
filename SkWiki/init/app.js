@@ -38,7 +38,7 @@ app.use(cookieParser());
 app.get("*", skwiki.home);
 app.get('/skwikis', skwiki.getLinks);
 app.get('/skwiki/:skwiki_id', skwiki.getSkwiki);
-app.get('/search', skwiki.search);
+//app.get('/search', skwiki.search);
 app.delete("/skwiki/:skwiki_id", skwiki.deleteSkwiki);
 
 //Subroutes (page changes w/out refresh) fill in by page

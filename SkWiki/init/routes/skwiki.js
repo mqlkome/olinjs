@@ -10,6 +10,19 @@ db.on('error', console.error.bind(console, 'connection error: '));
 var skwiki = {};
 
 
+    skwiki.getLinks = function(req, res) {
+
+        // use mongoose to get all todos in the database
+        skwik.find(function(err, skwikis) {
+
+            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+            if (err)
+                res.send(err)
+            res.json(skwikis.title);
+//return skwiki titles for listing
+        });
+    };
+
     skwiki.getSkwiki = function(req, res) {
 
         // use mongoose to get all todos in the database
