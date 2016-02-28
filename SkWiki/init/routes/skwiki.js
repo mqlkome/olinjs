@@ -28,7 +28,7 @@ var skwiki = {};
     skwiki.getSkwiki = function(req, res) {
 
         // use mongoose to get all todos in the database
-        skwik.find(function(err, skwikis) {
+        skwik.findOne({_id: req.params.todo_id}, function(err, skwikis) {
 
             // if there is an error retrieving, send the error. nothing after res.send(err) will execute
             if (err)
