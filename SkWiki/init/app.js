@@ -7,14 +7,13 @@ var bodyParser = require('body-parser'); //lets server access req.body
 var exphbs = require('express-handlebars'); //lets you use handlebars
 var mongoose = require('mongoose'); //javascript wrapper for mongo; lets you use database
 var session = require('express-session');
-var morgan = require('morgan');             // log requests to the console (express4) /debugging tool
+var logger = require('morgan');             // log requests to the console (express4) /debugging tool
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
 
 
 //Main page routes
-var index = require('./routes/index');
-var login = require('./routes/login');
-var logout = require('./routes/logout');
+var skwiki = require('./routes/skwiki');
+
 
 var app = express(); //initialize app object
 
