@@ -17,7 +17,7 @@ var skwiki = require('./routes/skwiki');
 
 var app = express(); //initialize app object
 
-mongoose.connect('mongodb://localhost/test'); //connect to mongo database
+//mongoose.connect('mongodb://localhost/test'); //connect to mongo database
 
 // view engine setup
 app.engine("handlebars", exphbs({defaultLayout: "main"}));

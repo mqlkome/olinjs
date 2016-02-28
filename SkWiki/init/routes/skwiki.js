@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var skwik = require('../models/skwikiSchema');
+var path = require('path'); //path allows the creation of paths (with /) from individual names
+
 var mongoose = require('mongoose');
 mongoose.connect("mongodb://localhost/skwiki");
 
@@ -106,7 +108,8 @@ var skwiki = {};
     };
 
     skwiki.home = function(req, res) {
-        res.sendfile(__dirname + '../public/Skeleton/index.html');
+        // res.sendfile(__dirname + '../public/Skeleton/index.html');
+        res.sendFile('index.html', { root: path.join(__dirname, '../public/Skeleton') });
         //res.sendfile('../public/main.html'); // load the single view file (angular will handle the page changes on the front-end)
     };
 
