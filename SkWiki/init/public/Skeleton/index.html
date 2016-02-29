@@ -19,8 +19,8 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" type = "text/css" href="Skeleton/css/normalize.css">
+  <link rel="stylesheet" type = "text/css" href="Skeleton/css/skeleton.css">
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -41,16 +41,35 @@
   <div class="container">
     <div class="row">
       <div class="one-half column" style="margin-top: 25%">
-        <h1>The #1 Skeleton Wiki</h1>
+        <h4>The #1 Skeleton Wiki</h4>
         <p>Welcome to the Skwiki. It's currently little more than bare bones...</p>
+        
         <div class="skwikiList" ng-repeat="skwiki in skwikis">
           <div ng-click="setCurrentSkwiki(skwiki)">
             {{skwiki.title}}
           </div>
         </div>
-        <div>
-          {{currentSkwiki.text}}
+
+        <div class = "displaySelectedSkwiki">
+          <h5>{{currentSkwiki.title}}</h5>
+          <p>{{currentSkwiki.text}}</p>
         </div>
+
+        <div class = "addNewSkwikiEntry">
+          Title: <input type="text" ng-model = "title">
+          Article: <input type="text" ng-model = "text">
+          <button type = "submit" class = "add" ng-click = "createSkwiki()">Add Skwiki</button>
+        </div>
+
+        <div class = "editSkwiki">
+          Edit Article for {{currentSkwiki.title}}: <input type="text" ng-model = "editText" placeholder = "rewrite paleontology">
+          <button type = "submit" class = "edit" ng-click = "editSkwiki(currentSkwiki._id)" >Edit Skwiki</button>
+          <button type = "submit" class = "delete" ng-click = "deleteSkwiki(currentSkwiki._id)" >Delete Skwiki</button>
+
+        </div>
+
+
+
       </div>
     </div>
   </div>

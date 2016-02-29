@@ -23,7 +23,7 @@ function mainController($scope, $http) {
 
     // when submitting the add form, send the text to the node API
     $scope.createSkwiki = function() {
-        $http.post("/addSkwiki", $scope.formData)
+        $http.post("/addSkwiki", {title: $scope.title, text: $scope.text})
             .success(function(data) {
                 $scope.formData = {}; // clear the form so our user is ready to enter another
                 $scope.skwikis = data;
@@ -47,8 +47,9 @@ function mainController($scope, $http) {
     
     //edits a todo after it has been made
     $scope.editSkwiki = function(id) {
-        $http.post("/skwiki/" + id, $scope.formData)
+        $http.post("/editSkwiki/" + id, {text:$scope.editText})
             .success(function(data) {
+                $scope.formData = {};
                 $scope.skwikis = data;
             })
             .error(function(data) {

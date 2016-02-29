@@ -28,7 +28,7 @@ routes.getLinks = function(req, res) {
 routes.getSkwiki = function(req, res) {
 
     // use mongoose to get all todos in the database
-    skwiki.findOne({_id: req.params.todo_id}, function(err, skwikis) {
+    skwiki.findOne({_id: req.params.skwiki_id}, function(err, skwikis) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err)
@@ -46,8 +46,8 @@ routes.getSkwiki = function(req, res) {
 
 // create todo and send back all todos after creation
 routes.addSkwiki = function(req, res) {
-
     // create a skwiki, information comes from AJAX request from Angular
+    console.log(req.body)
     skwiki.create({
         title : req.body.title,
         text : req.body.text
@@ -91,14 +91,16 @@ routes.deleteSkwiki = function(req, res) {
 };
 
 routes.editSkwiki = function(req, res) {
+    console.log("editSkwiki req.body: ")
+    console.log(req.body)
     skwiki.update({
         _id : req.params.skwiki_id
-    },{$set:{text: req.body.text}}, function(err, skwiki) {
+    },{$set:{text: req.body.text}}, function(err, skwi) {
         if (err)
             res.send(err);
 
         // get and return all the todos after you create another
-        skwiki.find(function(err, skwikis) {
+        skwiki.findOne({_id: req.params.todo_id}, function(err, skwikis) {
             if (err)
                 res.send(err)
             res.json(skwikis);

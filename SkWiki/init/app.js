@@ -43,7 +43,7 @@ app.delete("/skwiki/:skwiki_id", skwiki.deleteSkwiki);
 //Subroutes (page changes w/out refresh) fill in by page
 //ex. app.post('/addIngredient', ingredients.addIngredient);
 app.post('/addSkwiki', skwiki.addSkwiki);
-app.post('/editSkwiki', skwiki.editSkwiki);
+app.post('/editSkwiki/:skwiki_id', skwiki.editSkwiki);
 
 app.get("*", skwiki.home);
 
