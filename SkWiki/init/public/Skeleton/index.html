@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app = "skwikiApp">
 <head>
 
   <!-- Basic Page Needs
@@ -44,10 +44,13 @@
         <h1>The #1 Skeleton Wiki</h1>
         <p>Welcome to the Skwiki. It's currently little more than bare bones...</p>
         <div class="skwikiList" ng-repeat="skwiki in skwikis">
-          {{skwiki.title}}
+          <div ng-click="setCurrentSkwiki(skwiki)">
+            {{skwiki.title}}
+          </div>
         </div>
-        
-        
+        <div>
+          {{currentSkwiki.text}}
+        </div>
       </div>
     </div>
   </div>

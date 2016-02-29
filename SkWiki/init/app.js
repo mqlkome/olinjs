@@ -35,7 +35,6 @@ app.use(methodOverride());
 app.use(cookieParser());
 
 //Routing: directing requests to render stuff ("API spec")
-app.get("*", skwiki.home);
 app.get('/skwikis', skwiki.getLinks);
 app.get('/skwiki/:skwiki_id', skwiki.getSkwiki);
 //app.get('/search', skwiki.search);
@@ -46,6 +45,7 @@ app.delete("/skwiki/:skwiki_id", skwiki.deleteSkwiki);
 app.post('/addSkwiki', skwiki.addSkwiki);
 app.post('/editSkwiki', skwiki.editSkwiki);
 
+app.get("*", skwiki.home);
 
 //Choose a location from which the app is accessed
 var PORT = process.env.PORT || 3000;

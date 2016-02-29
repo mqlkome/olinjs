@@ -1,7 +1,8 @@
-var app = angular.module('myApp', ['ngRoute']);
+var app = angular.module("skwikiApp", ['ngRoute']);
 
 function mainController($scope, $http) {
     $scope.formData = {};
+    $scope.currentSkwiki = null;
 
     // when landing on the page, get all skwiki titles and show them
     $http.get("/skwikis")
@@ -12,6 +13,13 @@ function mainController($scope, $http) {
         .error(function(data) {
             console.log('Error: ' + data);
         });
+
+    $scope.setCurrentSkwiki = function(skwiki) {
+        if (skwiki === $scope.currentSkwiki){
+            $scope.currentSkwiki = null;
+        }else{ $scope.currentSkwiki = skwiki; }
+
+    }
 
     // when submitting the add form, send the text to the node API
     $scope.createSkwiki = function() {
