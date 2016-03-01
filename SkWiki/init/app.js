@@ -1,27 +1,17 @@
 //Useful server-side libraries/packages
-//ask google about npm ___ to learn more
 var express = require('express');//express makes an app object
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 var cookieParser = require('cookie-parser'); //lets server access cookies
 var bodyParser = require('body-parser'); //lets server access req.body
 var exphbs = require('express-handlebars'); //lets you use handlebars
 var mongoose = require('mongoose'); //javascript wrapper for mongo; lets you use database
-var session = require('express-session');
 var logger = require('morgan');             // log requests to the console (express4) /debugging tool
 var methodOverride = require('method-override'); // simulate DELETE and PUT (express4)
-
 
 //Main page routes
 var skwiki = require('./routes/skwiki');
 
-
 var app = express(); //initialize app object
-
-//mongoose.connect('mongodb://localhost/test'); //connect to mongo database
-
-// view engine setup
-app.engine("handlebars", exphbs({defaultLayout: "main"}));
-app.set("view engine", "handlebars");
 
 //Middleware: happens before the request gets to the routes and must happen in order
 // uncomment after placing your favicon in /public
@@ -36,7 +26,7 @@ app.use(cookieParser());
 
 //Routing: directing requests to render stuff ("API spec")
 app.get('/skwikis', skwiki.getLinks);
-app.get('/skwiki/:skwiki_id', skwiki.getSkwiki);
+//app.get('/skwiki/:skwiki_id', skwiki.getSkwiki);
 //app.get('/search', skwiki.search);
 app.delete("/skwiki/:skwiki_id", skwiki.deleteSkwiki);
 
