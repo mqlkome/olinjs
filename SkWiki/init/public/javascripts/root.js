@@ -17,7 +17,8 @@ function mainController($scope, $http) {
         if (skwiki === $scope.currentSkwiki){
             $scope.currentSkwiki = null;
         }else{ 
-            $scope.currentSkwiki = skwiki; 
+            $scope.currentSkwiki = skwiki;
+            $scope.editText = skwiki.text;
         }
     }
 
@@ -50,8 +51,11 @@ function mainController($scope, $http) {
     $scope.editSkwiki = function(id) {
         $http.post("/editSkwiki/" + id, {text:$scope.editText})
             .success(function(data) {
+                console.log(data.editedSkwiki);
+                $scope.currentSkwiki.text = data.editedSkwiki.text;
                 $scope.editText = null;
-                $scope.skwikis = data;
+                $scope.skwikis = data.skwikis;
+
             })
             .error(function(data) {
                 console.log('Error: ' + data);

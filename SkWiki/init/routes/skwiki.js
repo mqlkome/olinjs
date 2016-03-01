@@ -118,11 +118,11 @@ routes.editSkwiki = function(req, res) {
         if (err)
             res.send(err);
 
-        // get and return all the todos after you create another
-        skwiki.findOne({_id: req.params.todo_id}, function(err, skwikis) {
+        // get and return all the skwikis after you create another
+        skwiki.find({}, function(err, skwikis) {
             if (err)
                 res.send(err)
-            res.json(skwikis);
+            res.json({skwikis: skwikis, editedSkwiki: req.body});
         });
     });
 };
