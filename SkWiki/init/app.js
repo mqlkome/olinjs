@@ -26,6 +26,7 @@ app.use(cookieParser());
 
 //Routing: directing requests to render stuff ("API spec")
 app.get('/skwikis', skwiki.getLinks);
+app.get('/searchSkwiki:skwiki_title', skwiki.searchSkwiki);
 //app.get('/skwiki/:skwiki_id', skwiki.getSkwiki);
 //app.get('/search', skwiki.search);
 app.delete("/skwiki/:skwiki_id", skwiki.deleteSkwiki);
@@ -34,6 +35,7 @@ app.delete("/skwiki/:skwiki_id", skwiki.deleteSkwiki);
 //ex. app.post('/addIngredient', ingredients.addIngredient);
 app.post('/addSkwiki', skwiki.addSkwiki);
 app.post('/editSkwiki/:skwiki_id', skwiki.editSkwiki);
+
 
 app.get("*", skwiki.home);
 

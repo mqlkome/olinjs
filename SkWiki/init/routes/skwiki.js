@@ -14,7 +14,7 @@ var routes = {};
 
 routes.getLinks = function(req, res) {
     console.log("hello, getLinks here")
-    // use mongoose to get all todos in the database
+    // use mongoose to get all Skwikis in the database
     skwiki.find(function(err, skwikis) {
         console.log(skwikis);
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
@@ -44,6 +44,25 @@ routes.getSkwiki = function(req, res) {
     });
 };
 
+routes.searchSkwiki = function(req, res) {
+	skwiki.find(function(err, skwikis) {
+        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+        if (err)
+            res.send(err)
+        //use regular expressions to search all the entries for the letters in the search bar, if it finds them in any, it returns an object containing
+        //all objects that don't contain null
+		var returnSkwikis = {}
+		for (var i = 0; i < skwikis.length; i++) {
+			var str = skwikis[i].title
+			var patt = new RegExp(req.params.skwiki_title);
+			var res = patt.exec(str);
+			if (res != null) {
+				returnSkwikis.push(skwikis[i])
+			} 
+    	}
+    	res.json(returnSkwikis)
+});
+}
 // create todo and send back all todos after creation
 routes.addSkwiki = function(req, res) {
     // create a skwiki, information comes from AJAX request from Angular
