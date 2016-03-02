@@ -40,38 +40,40 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
     <div class="row">
-      <div class="one-third column" style="margin-top: 25%">
-        <h4>The #1 Skeleton Wiki</h4>
-        <p>Welcome to the Skwiki. It's currently little more than bare bones...</p>
-        
+      <div class="one-third column" style="margin-top: 10%; border-right: 1px solid #E1E1E1;">
+        <h4>The Skeleton Wiki</h4>
+        <p>Welcome to the SkWiki! If you want totally true information pertaining to skeletons, you might not be in the wrong place.</p>
+        <!-- the following input can become the search bar, but is not connected yet -->
+        <input type="text" placeholder = "search the SkWiki"><br>
+
         <div class="skwikiList" ng-repeat="skwiki in skwikis">
           <div ng-click="setCurrentSkwiki(skwiki)">
-            {{skwiki.title}}
+            <a>{{skwiki.title}}</a>
           </div>
         </div>
       </div>
 
-      <div class = "one-third column" style="margin-top: 25%" >
+      <div class = "one-third column" style="margin-top: 10%; border-right: 1px solid #E1E1E1;">
       <div ng-show = "currentSkwiki.text">
         <div class = "displaySelectedSkwiki">
-          <h5>{{currentSkwiki.title}}</h5>
+          <h4>{{currentSkwiki.title}}</h4>
           <p>{{currentSkwiki.text}}</p>
         </div>
-        <div class = "editSkwiki" >
-          Edit Article for {{currentSkwiki.title}}: <br>
-          <input ng-model = "editText" placeholder = "rewrite paleontology"><br>
+        <div class = "editSkwiki" style="margin-top: 30%;">
+          <h5>Edit {{currentSkwiki.title}} SkWiki:</h5> <br>
+          <textarea ng-model = "editText" placeholder = "rewrite paleontology"></textarea><br>
           <button type = "submit" class = "edit" ng-click = "editSkwiki(currentSkwiki._id)" >Edit Skwiki</button>
           <button type = "submit" class = "delete" ng-click = "deleteSkwiki(currentSkwiki._id)" >Delete Skwiki</button>
         </div>
       </div>
       </div>
 
-      <div class = "one-third column" style="margin-top: 25%">
-        <h5> Contribute An Article </h5>
+      <div class = "one-third column" style="margin-top: 10%;">
+        <h5> Contribute A SkWiki </h5>
         <div class = "addNewSkwikiEntry">
-          Title: <input type="text" ng-model = "title"> <br>
-          Article: <input type="text" ng-model = "text"><br>
-          <button type = "submit" class = "add" ng-click = "createSkwiki()">Add Skwiki</button>
+          Title:<br> <input type="text" ng-model = "title" placeholder="what bones?"> <br>
+          Article:<br> <textarea ng-model = "text" placeholder = "you've got something brilliant to say"></textarea><br>
+          <button type = "submit" class = "add" ng-click = "createSkwiki()">Add to SkWikis</button>
         </div>
       </div>
       

@@ -160,9 +160,11 @@ p {
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
-  color: #1EAEDB; }
+  color: #1EAEDB;
+  cursor: pointer; }
 a:hover {
-  color: #0FA0CE; }
+  color: #0FA0CE;
+  cursor: pointer; }
 
 
 /* Buttons
@@ -375,12 +377,12 @@ form {
 
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-hr {
+/*hr {
   margin-top: 3rem;
   margin-bottom: 3.5rem;
   border-width: 0;
   border-top: 1px solid #E1E1E1; }
-
+*/
 
 /* Clearing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
