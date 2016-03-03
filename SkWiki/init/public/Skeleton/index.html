@@ -43,12 +43,13 @@
       <div class="one-third column" style="margin-top: 10%; border-right: 1px solid #E1E1E1;">
         <h4>The Skeleton Wiki</h4>
         <p>Welcome to the SkWiki! If you want totally true information pertaining to skeletons, you might not be in the wrong place.</p>
-        <!-- the following input can become the search bar, but is not connected yet -->
-        <input type="text" placeholder = "search the SkWiki"><br>
 
-        <div class="skwikiList" ng-repeat="skwiki in skwikis">
-          <div ng-click="setCurrentSkwiki(skwiki)">
-            <a>{{skwiki.title}}</a>
+        <input type="text" placeholder = "search the SkWiki" ng-model="searchText">
+        <div id="searchTextResults">
+          <div class="skwikiList" ng-repeat="skwiki in skwikis | filter:searchText">
+            <div ng-click="setCurrentSkwiki(skwiki)">
+              <a>{{skwiki.title}}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -57,6 +58,8 @@
       <div ng-show = "currentSkwiki.text">
         <div class = "displaySelectedSkwiki">
           <h4>{{currentSkwiki.title}}</h4>
+
+          <img type="image/png" ng-controller="imageHandler" ng-src= "{{image}}">
           <p>{{currentSkwiki.text}}</p>
         </div>
         <div class = "editSkwiki" style="margin-top: 30%;">

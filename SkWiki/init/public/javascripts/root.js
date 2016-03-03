@@ -61,6 +61,13 @@ function mainController($scope, $http) {
                 console.log('Error: ' + data);
             });
     };
+
+    $scope.imageHandler = function() {
+        var images = ["images/favicon.png", "images/favicon.png"]
+        var numPaths = 2;
+        var r = Math.floor(Math.random() * (numPaths));
+        $scope.image = images[r];
+    };
 //Are we even using this one??
     // $scope.getSkwiki = function(id) {
     //     $http.post("/skwiki/" + id, $scope.formData)

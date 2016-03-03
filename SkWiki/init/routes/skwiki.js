@@ -54,7 +54,7 @@ routes.searchSkwiki = function(req, res) {
 		var returnSkwikis = {}
 		for (var i = 0; i < skwikis.length; i++) {
 			var str = skwikis[i].title
-			var patt = new RegExp(req.params.skwiki_title);
+			var patt = new RegExp(req.body.search);
 			var res = patt.exec(str);
 			if (res != null) {
 				returnSkwikis.push(skwikis[i])
