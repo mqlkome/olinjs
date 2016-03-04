@@ -14,7 +14,7 @@ function mainController($scope, $http) {
         .error(function(data) {
             console.log('Error: ' + data);
         });
-//sets currently clicked on article
+    //sets currently clicked on skwiki
     $scope.setCurrentSkwiki = function(skwiki) {
         if (skwiki === $scope.currentSkwiki){
             $scope.currentSkwiki = null;
@@ -54,7 +54,6 @@ function mainController($scope, $http) {
     $scope.editSkwiki = function(id) {
         $http.post("/editSkwiki/" + id, {text:$scope.editText})
             .success(function(data) {
-                console.log(data.editedSkwiki);
                 $scope.currentSkwiki.text = data.editedSkwiki.text;
                 $scope.editText = null;
                 $scope.skwikis = data.skwikis;
@@ -64,24 +63,13 @@ function mainController($scope, $http) {
                 console.log('Error: ' + data);
             });
     };
-//generates a random image for each article
+    //generates a random image for each article
     $scope.imageHandler = function() {
         $scope.$on('scanner-started', function() {
             var images = ["Skeleton/images/skeleton1.png","Skeleton/images/skeleton2.png","Skeleton/images/skeleton3.png","Skeleton/images/skeleton4.png","Skeleton/images/skeleton5.png"]
             var numPaths = 5;
             var r = Math.floor(Math.random() * (numPaths));
             $scope.image = images[r];
-    });
+        });
     };
-//Are we even using this one??
-    // $scope.getSkwiki = function(id) {
-    //     $http.post("/skwiki/" + id, $scope.formData)
-    //         .success(function(data) {
-    //             $scope.skwikis = data;
-    //         })
-    //         .error(function(data) {
-    //             console.log('Error: ' + data);
-    //         });
-    // };
-
 }

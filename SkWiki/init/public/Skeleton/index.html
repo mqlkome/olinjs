@@ -1,52 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" ng-app = "skwikiApp">
 <head>
-
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- Basic Page Needs-->
   <meta charset="utf-8">
   <title>Skeleton Wiki</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- Mobile Specific Metas-->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- FONT
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- FONT -->
   <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
 
-  <!-- CSS
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- CSS -->
   <link rel="stylesheet" type = "text/css" href="Skeleton/css/normalize.css">
   <link rel="stylesheet" type = "text/css" href="Skeleton/css/skeleton.css">
 
-  <!-- Favicon
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="Skeleton/images/favicon.png">
 
-
-
+<!-- Javascripting -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
   <script src="javascripts/root.js"></script>
-
 </head>
-<body ng-controller = "mainController">
 
-  <!-- Primary Page Layout
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+<body ng-controller = "mainController">
   <div class="container">
     <div class="row">
+<!-- left-most column -->
       <div class="one-third column" style="margin-top: 10%; border-right: 1px solid #E1E1E1;">
+<!-- header -->
         <img type="image/png" src= "Skeleton/images/favicon.png">
         <h4>The Skeleton Wiki</h4>
         <p>Welcome to the SkWiki! If you want totally true information pertaining to skeletons, you might not be in the wrong place.</p>
 
+<!-- search bar -->
         <input type="text" placeholder = "search the SkWiki" ng-model="searchText">
         <div id="searchTextResults">
+<!-- article links list -->
           <div class="skwikiList" ng-repeat="skwiki in skwikis | filter:searchText">
             <div ng-click="setCurrentSkwiki(skwiki)">
               <a>{{skwiki.title}}</a>
@@ -55,14 +49,16 @@
         </div>
       </div>
 
+<!-- middle column -->
       <div class = "one-third column" style="margin-top: 10%; border-right: 1px solid #E1E1E1;">
+<!-- display selected SkWikihere -->
       <div ng-show = "currentSkwiki.text">
         <div class = "displaySelectedSkwiki">
           <h4>{{currentSkwiki.title}}</h4>
-
           <img class = "image" type="image/png" ng-controller="imageHandler" ng-src= "{{image}}">
           <p>{{currentSkwiki.text}}</p>
         </div>
+<!-- enable editing of the current SkWiki text -->
         <div class = "editSkwiki" style="margin-top: 30%;">
           <h5>Edit {{currentSkwiki.title}} SkWiki:</h5> <br>
           <textarea ng-model = "editText" placeholder = "rewrite paleontology"></textarea><br>
@@ -71,8 +67,10 @@
         </div>
       </div>
       </div>
-
+      
+<!-- right-most column -->
       <div class = "one-third column" style="margin-top: 10%;">
+<!-- enable contribution of new SkWiki -->
         <h5> Contribute A SkWiki </h5>
         <div class = "addNewSkwikiEntry">
           Title:<br> <input type="text" ng-model = "title" placeholder="what bones?"> <br>
@@ -80,14 +78,7 @@
           <button type = "submit" class = "add" ng-click = "createSkwiki()">Add to SkWikis</button>
         </div>
       </div>
-      
-
-      
     </div>
   </div>
-<!-- End Document
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 </body>
 </html>
-
-

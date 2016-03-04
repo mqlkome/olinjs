@@ -50,8 +50,11 @@
     padding: 0; }
 }
 
-/* For devices larger than 550px */
-@media (min-width: 550px) {
+
+
+
+
+@media (min-width: 550px){
   .container {
     width: 80%; }
   .column,
@@ -379,12 +382,8 @@ form {
 
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-/*hr {
-  margin-top: 3rem;
-  margin-bottom: 3.5rem;
-  border-width: 0;
-  border-top: 1px solid #E1E1E1; }
-*/
+.image { max-width: 100%; 
+         max-height: 300px;}
 
 /* Clearing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */

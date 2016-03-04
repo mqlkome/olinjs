@@ -21,12 +21,11 @@ routes.getLinks = function(req, res) {
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err)
             res.send(err)
-        res.json(skwikis);
-//return skwiki titles for listing
+        res.json(skwikis);  //return skwiki titles for listing
     });
 };
 
-//Unused potential search bar functionality
+//Unused potential search bar functionality (chose to use Angular's filter instead)
 routes.searchSkwiki = function(req, res) {
 	skwiki.find(function(err, skwikis) {
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
@@ -46,6 +45,7 @@ routes.searchSkwiki = function(req, res) {
     	res.json(returnSkwikis)
 });
 }
+
 // create skwiki and send back all todos after creation
 routes.addSkwiki = function(req, res) {
     // create a skwiki, information comes from AJAX request from Angular
@@ -64,10 +64,7 @@ routes.addSkwiki = function(req, res) {
             res.json(skwikis);
         });
     });
-
 };
-
-
 
 // delete a skwiki
 routes.deleteSkwiki = function(req, res) {
@@ -84,13 +81,10 @@ routes.deleteSkwiki = function(req, res) {
                     res.send(err)
 
                 res.json(skwikis);
-                
-                
             });
         });
-      
-  
 };
+
 //edits a skwiki
 routes.editSkwiki = function(req, res) {
     console.log("editSkwiki req.body: ")
@@ -109,12 +103,10 @@ routes.editSkwiki = function(req, res) {
         });
     });
 };
+
 //home route
 routes.home = function(req, res) {
-    // res.sendfile(__dirname + '../public/Skeleton/index.html');
     res.sendFile('index.html', { root: path.join(__dirname, '../public/Skeleton') });
-    //res.sendfile('../public/main.html'); // load the single view file (angular will handle the page changes on the front-end)
 };
-
 
 module.exports = routes;
