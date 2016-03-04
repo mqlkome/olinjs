@@ -24,7 +24,7 @@
 
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="icon" type="image/png" href="Skeleton/images/favicon.png">
 
 
 
@@ -41,6 +41,7 @@
   <div class="container">
     <div class="row">
       <div class="one-third column" style="margin-top: 10%; border-right: 1px solid #E1E1E1;">
+        <img type="image/png" src= "Skeleton/images/favicon.png">
         <h4>The Skeleton Wiki</h4>
         <p>Welcome to the SkWiki! If you want totally true information pertaining to skeletons, you might not be in the wrong place.</p>
 
@@ -59,7 +60,7 @@
         <div class = "displaySelectedSkwiki">
           <h4>{{currentSkwiki.title}}</h4>
 
-          <img type="image/png" ng-controller="imageHandler" ng-src= "{{image}}">
+          <img class = "image" type="image/png" ng-controller="imageHandler" ng-src= "{{image}}">
           <p>{{currentSkwiki.text}}</p>
         </div>
         <div class = "editSkwiki" style="margin-top: 30%;">
