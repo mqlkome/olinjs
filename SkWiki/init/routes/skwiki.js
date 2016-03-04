@@ -4,16 +4,17 @@ var skwiki = require('../models/skwikiSchema');
 var path = require('path'); //path allows the creation of paths (with /) from individual names
 
 var mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost/skwiki");
+mongoose.connect(process.env.PROD_MONGODB||"mongodb://localhost/skwiki");
+
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error: '));
 
 var routes = {};
+//All of the routes for the Skwiki. Adds all database integration and data manipulation/sorting
 
-
+//Gets the list of all entries in the database
 routes.getLinks = function(req, res) {
-    console.log("hello, getLinks here")
     // use mongoose to get all Skwikis in the database
     skwiki.find(function(err, skwikis) {
         console.log(skwikis);
@@ -25,25 +26,7 @@ routes.getLinks = function(req, res) {
     });
 };
 
-routes.getSkwiki = function(req, res) {
-
-    // use mongoose to get all todos in the database
-    skwiki.findOne({_id: req.params.skwiki_id}, function(err, skwikis) {
-
-        // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-        if (err)
-            res.send(err)
-        res.json(skwikis);
-        // comp.find(function(err, compl) {
-        //   if (err)
-        //     res.send(err)
-        //   var results = {"todos": todos, "comp": compl}
-        //   res.json(results);
-        // });
-         // return all skwikis in JSON format
-    });
-};
-
+//Unused potential search bar functionality
 routes.searchSkwiki = function(req, res) {
 	skwiki.find(function(err, skwikis) {
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
@@ -63,7 +46,7 @@ routes.searchSkwiki = function(req, res) {
     	res.json(returnSkwikis)
 });
 }
-// create todo and send back all todos after creation
+// create skwiki and send back all todos after creation
 routes.addSkwiki = function(req, res) {
     // create a skwiki, information comes from AJAX request from Angular
     console.log(req.body)
@@ -86,7 +69,7 @@ routes.addSkwiki = function(req, res) {
 
 
 
-// delete a todo
+// delete a skwiki
 routes.deleteSkwiki = function(req, res) {
   //grab the todo and place it in a new database of completed todos
         skwiki.remove({
@@ -108,7 +91,7 @@ routes.deleteSkwiki = function(req, res) {
       
   
 };
-
+//edits a skwiki
 routes.editSkwiki = function(req, res) {
     console.log("editSkwiki req.body: ")
     console.log(req.body)
@@ -126,6 +109,7 @@ routes.editSkwiki = function(req, res) {
         });
     });
 };
+//home route
 routes.home = function(req, res) {
     // res.sendfile(__dirname + '../public/Skeleton/index.html');
     res.sendFile('index.html', { root: path.join(__dirname, '../public/Skeleton') });

@@ -1,5 +1,7 @@
 var app = angular.module("skwikiApp", ['ngRoute']);
 
+//Handles all the angular controllers and data acquiring from the routes.
+
 function mainController($scope, $http) {
     $scope.formData = {};
     $scope.currentSkwiki = null;
@@ -12,13 +14,14 @@ function mainController($scope, $http) {
         .error(function(data) {
             console.log('Error: ' + data);
         });
-
+//sets currently clicked on article
     $scope.setCurrentSkwiki = function(skwiki) {
         if (skwiki === $scope.currentSkwiki){
             $scope.currentSkwiki = null;
         }else{ 
             $scope.currentSkwiki = skwiki;
             $scope.editText = skwiki.text;
+            $scope.$broadcast('scanner-started');
         }
     }
 
@@ -61,12 +64,14 @@ function mainController($scope, $http) {
                 console.log('Error: ' + data);
             });
     };
-
+//generates a random image for each article
     $scope.imageHandler = function() {
-        var images = ["images/favicon.png", "images/favicon.png"]
-        var numPaths = 2;
-        var r = Math.floor(Math.random() * (numPaths));
-        $scope.image = images[r];
+        $scope.$on('scanner-started', function() {
+            var images = ["Skeleton/images/skeleton1.png","Skeleton/images/skeleton2.png","Skeleton/images/skeleton3.png","Skeleton/images/skeleton4.png","Skeleton/images/skeleton5.png"]
+            var numPaths = 5;
+            var r = Math.floor(Math.random() * (numPaths));
+            $scope.image = images[r];
+    });
     };
 //Are we even using this one??
     // $scope.getSkwiki = function(id) {

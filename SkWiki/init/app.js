@@ -13,9 +13,7 @@ var skwiki = require('./routes/skwiki');
 
 var app = express(); //initialize app object
 
-//Middleware: happens before the request gets to the routes and must happen in order
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -27,16 +25,13 @@ app.use(cookieParser());
 //Routing: directing requests to render stuff ("API spec")
 app.get('/skwikis', skwiki.getLinks);
 app.get('/searchSkwiki', skwiki.searchSkwiki);
-//app.get('/skwiki/:skwiki_id', skwiki.getSkwiki);
-//app.get('/search', skwiki.search);
 app.delete("/skwiki/:skwiki_id", skwiki.deleteSkwiki);
 
 //Subroutes (page changes w/out refresh) fill in by page
-//ex. app.post('/addIngredient', ingredients.addIngredient);
 app.post('/addSkwiki', skwiki.addSkwiki);
 app.post('/editSkwiki/:skwiki_id', skwiki.editSkwiki);
 
-
+//apply to all pages
 app.get("*", skwiki.home);
 
 //Choose a location from which the app is accessed
