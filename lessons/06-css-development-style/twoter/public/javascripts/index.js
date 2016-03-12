@@ -5,12 +5,14 @@ var $eraseTwoteButton = $(".eraseTwoteButton");
 var $userListEntry = $("#userList li")
 
 var onSuccessIndex = function(data, status){
+        //Nice
 	var $newLi = $templateLi.clone()
 	$newLi.attr('id', data._id);
   	$newLi.css('display', 'block');
   	$newLi.find('.user').html(data.username);
   	$newLi.find('.twote').html(data.twote);
   	$twoteList.prepend($newLi);
+        // You are going to have to rebind your on click handler here. That is why you can't delete new twotes
 };
 
 var onSuccessErase = function(data, status){

@@ -3,6 +3,7 @@ var Twote = require('../models/twoteModel')
 var User = require('../models/userModel')
 var flag;
 
+// Nitpick: js tabs are 4 spaces not 8
 routes.homePage = function(req,res){
 	Twote.find({}).sort({'_id' : -1}).exec(function (error, twotes){
 		if (error){
@@ -23,6 +24,7 @@ routes.homePage = function(req,res){
 
 routes.addTwote = function(req, res){
 	User.findOne({_id: req.session.userID}, function (err, user){
+                // Twote.create() shoudl make and save in one function
 		var twote = new Twote({
 			user_id: req.session.userID,
 			twote: req.body.twote,
