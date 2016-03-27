@@ -22,7 +22,8 @@ routes.homePage = function(req,res){
 };
 
 routes.addTwote = function(req, res){
-	User.findOne({_id: req.session.userID}, function (err, user){
+	var user = {_id: req.session.userID}
+	User.findOne(user, function (err, user){
 		var twote = new Twote({
 			user_id: req.session.userID,
 			twote: req.body.twote,

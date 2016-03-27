@@ -8,8 +8,7 @@ routes.loginPage = function(req,res){
 
 routes.logIn = function(req, res, next){
 	User.find({username: req.body.username},function (error, user){
-		if (error){
-			console.log(error);
+		if (error){res.status(500).send('Error when looking up entered username')
 		} else{
 			if(user.length > 0){
 				//TODO: make sure that there cannot be more than one user with the same name

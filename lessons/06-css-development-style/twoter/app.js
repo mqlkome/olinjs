@@ -48,6 +48,8 @@ app.post('/logIn', login.logIn);
 app.post('/logOut', logout.logOut);
 app.post('/eraseTwote', index.eraseTwote);
 
+module.exports = app;
+
 //Choose a location from which the app is accessed
 var PORT = process.env.PORT || 3000;
 app.listen(PORT, function() {
