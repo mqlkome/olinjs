@@ -5,11 +5,6 @@ var index = require('../../routes/index');
 
 
 describe("The app", function() {
-  // // Synchronous
-  // it('should use expect syntax', function() {
-  //   expect(false).not.to.be.true;
-  // });
-  // Async
   it('should return 200 OK on GET /', function(done) {
 	request(app)
 	  .get('/')
