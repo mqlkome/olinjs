@@ -5,7 +5,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "npm run karma && npm run cover-mocha",
+    "test": "npm run cover-mocha",
     "karma": "./node_modules/karma/bin/karma start karma.conf.js",
     "mocha": "./node_modules/mocha/bin/mocha tests/server",
     "cover-mocha": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha tests/server -- -R spec",
