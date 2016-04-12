@@ -18,7 +18,7 @@ function mainController($scope, $http) {
     $scope.setCurrentSkwiki = function(skwiki) {
         if (skwiki === $scope.currentSkwiki){
             $scope.currentSkwiki = null;
-        }else{ 
+        }else{
             $scope.currentSkwiki = skwiki;
             $scope.editText = skwiki.text;
             $scope.$broadcast('scanner-started');
@@ -49,7 +49,7 @@ function mainController($scope, $http) {
                 console.log('Error: ' + data);
             });
     };
-    
+
     //edits an existing skwiki
     $scope.editSkwiki = function(id) {
         $http.post("/editSkwiki/" + id, {text:$scope.editText})

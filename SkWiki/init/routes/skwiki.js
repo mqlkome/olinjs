@@ -14,6 +14,7 @@ var routes = {};
 //All of the routes for the Skwiki. Adds all database integration and data manipulation/sorting
 
 //Gets the list of all entries in the database
+//why is this called get links instead of getSkwikis?
 routes.getLinks = function(req, res) {
     // use mongoose to get all Skwikis in the database
     skwiki.find(function(err, skwikis) {
@@ -49,11 +50,13 @@ routes.searchSkwiki = function(req, res) {
 // create skwiki and send back all todos after creation
 routes.addSkwiki = function(req, res) {
     // create a skwiki, information comes from AJAX request from Angular
+    // prob=ably should have gotten rid of these log statements
     console.log(req.body)
     skwiki.create({
         title : req.body.title,
         text : req.body.text
     }, function(err, todo) {
+        // one line ifs with out {} can be dangerous
         if (err)
             res.send(err);
 
@@ -68,27 +71,30 @@ routes.addSkwiki = function(req, res) {
 
 // delete a skwiki
 routes.deleteSkwiki = function(req, res) {
-  //grab the todo and place it in a new database of completed todos
-        skwiki.remove({
-           _id : req.params.skwiki_id
-        }, function(err, removed) {
+    // I think this is for the todo app :P
+    //grab the todo and place it in a new database of completed todos
+    // could use findByIdandRemove, its faster it stops after finding the one you are looking for, and a bit clearer
+    skwiki.remove({
+       _id : req.params.skwiki_id
+    }, function(err, removed) {
+        if (err)
+           res.send(err);
+
+        // get and return all the skwikis after you create another
+        skwiki.find(function(err, skwikis) {
             if (err)
-               res.send(err);
+                res.send(err)
 
-            // get and return all the skwikis after you create another
-            skwiki.find(function(err, skwikis) {
-                if (err)
-                    res.send(err)
-
-                res.json(skwikis);
-            });
+            res.json(skwikis);
         });
+    });
 };
 
 //edits a skwiki
 routes.editSkwiki = function(req, res) {
     console.log("editSkwiki req.body: ")
     console.log(req.body)
+    //This would be a good place for findByIdAndUpdate
     skwiki.update({
         _id : req.params.skwiki_id
     },{$set:{text: req.body.text}}, function(err, skwi) {
