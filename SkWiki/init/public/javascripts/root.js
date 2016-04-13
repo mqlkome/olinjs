@@ -15,6 +15,7 @@ function mainController($scope, $http) {
             console.log('Error: ' + data);
         });
     //sets currently clicked on skwiki
+    // While this does a good job of changing the view, I cannot go directly to a page if I wanted to like other wikis allow. 
     $scope.setCurrentSkwiki = function(skwiki) {
         if (skwiki === $scope.currentSkwiki){
             $scope.currentSkwiki = null;
@@ -27,6 +28,7 @@ function mainController($scope, $http) {
 
     // when submitting the add form, send the text to the node API
     $scope.createSkwiki = function() {
+    // you should check that either the title or the text is not null before submitting.
         $http.post("/addSkwiki", {title: $scope.title, text: $scope.text})
             .success(function(data) {
                 $scope.title = null; // clear the form
