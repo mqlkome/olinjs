@@ -25,6 +25,7 @@ routes.getLinks = function(req, res) {
     });
 };
 
+//Good Idea to use angular filter, but why is it a bad idea to do search on the server instead?
 //Unused potential search bar functionality (chose to use Angular's filter instead)
 routes.searchSkwiki = function(req, res) {
 	skwiki.find(function(err, skwikis) {
@@ -50,6 +51,7 @@ routes.searchSkwiki = function(req, res) {
 routes.addSkwiki = function(req, res) {
     // create a skwiki, information comes from AJAX request from Angular
     console.log(req.body)
+    // make sure to validate the title and text before creating.
     skwiki.create({
         title : req.body.title,
         text : req.body.text
