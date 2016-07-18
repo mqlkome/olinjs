@@ -49,39 +49,33 @@ router.get('/cats', function(req, res, next){
 	            return b.age-a.age;
 	        }
 	        cats = cats.sort(compare);
-  		var msg = 'These are all the cats that live here: ' + '</br>'
-		cats.forEach(function(kitty){
-			msg = msg + kitty.name + ' ('+ kitty.color + ', ' + kitty.age + ')' + '</br>';
-		});
-		res.send(msg);
+	    //This is why templating exists so you don't have to do this. 
+	    //If you created a second handle bars sheet 
+  // 		var msg = 'These are all the cats that live here: ' + '</br>'
+		// cats.forEach(function(kitty){
+		// 	msg = msg + kitty.name + ' ('+ kitty.color + ', ' + kitty.age + ')' + '</br>';
+		// });
+		// res.send(msg);
+		res.render('newcatpage', {cats: cats});
 	});
 });
 
 router.get('/cats/old/bye', function(req, res, next){
-	Cat.find(function (err, cats) {
+	//you can sort within findOneAndRemove
+	Cat.findOneAndRemove({},{sort: "-age"}, function(err,cat){
 		if (err) return console.error(err);
-		//do sorting here
-		if (cats[0]){
-			function compare(a,b) {
-	            return b.age-a.age;
-	        }
-	        cats = cats.sort(compare);
-	        var firstCat = cats[0].name;
-			Cat.findOneAndRemove({name: firstCat}, function(err){
-				if (err) return console.error(err);
-				res.send(firstCat + ' has left the sanctuary');
-			});
-		} else {res.send("You're the only one here. What now?")}
-	})
+		res.send(cat.name + ' has left the sanctuary');
+	});
 });
 
 router.get('/cats/bycolor/:color', function(req, res, next){
-	Cat.find(function (err, cats) {
-		var colorChoice = req.params.color;
-		cats = cats.filter(function(entry){
-			return entry.color === colorChoice;
-		});
-		var msg = 'These are all the ' + colorChoice + ' cats that live here: ' + '</br>'
+	//do filtering with mongoose instead of js. 
+	Cat.find({color: req.params.color},function (err, cats) {
+		// var colorChoice = req.params.color;
+		// cats = cats.filter(function(entry){
+		// 	return entry.color === colorChoice;
+		// });
+		var msg = 'These are all the ' + req.params.color + ' cats that live here: ' + '</br>'
 		cats.forEach(function(kitty){
 			msg = msg + kitty.name + ' ('+ kitty.color + ', ' + kitty.age + ')' + '</br>';
 		});
